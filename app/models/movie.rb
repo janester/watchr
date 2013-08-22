@@ -22,6 +22,7 @@
 #  dvd_release     :date
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  kind            :string(255)
 #
 
 class Movie < ActiveRecord::Base
@@ -41,10 +42,15 @@ class Movie < ActiveRecord::Base
                   :rt_id,
                   :imdb_id,
                   :theater_release,
-                  :dvd_release
+                  :dvd_release,
+                  :kind
 
   has_many :followings
   has_many :users, :through => :followings
   has_many :characters
   has_many :actors, :through => :characters
+
+  def Movie.get_movies
+
+  end
 end
