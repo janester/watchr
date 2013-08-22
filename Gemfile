@@ -7,7 +7,8 @@ gem 'haml-rails'
 gem 'geocoder'
 gem 'stamp'
 gem 'devise'
-
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 
 
