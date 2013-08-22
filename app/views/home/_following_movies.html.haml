@@ -4,11 +4,14 @@
   .table-holder#following
     %table
       %tr.movie_list
-        - current_user.movies.each do |movie|
-          %td.movie_tile
-            .img= movie.p_poster.include?("default.gif") ? image_tag("default.png") : image_tag(movie.p_poster)
-            .title= movie.title
-            .score= "#{(movie.a_score + movie.c_score)/2}%"
-            .follow-action
-              -if current_user.movies.include?(movie)
-                = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true)
+        -if current_user.movies.empty?
+          %td#empty You Are Not Currently Following Any Movies
+        -else
+          - current_user.movies.sort_by{|x| x.a_score+x.c_score/2}.reverse.each do |movie|
+            %td.movie_tile
+              .img= movie.p_poster.include?("default.gif") ? image_tag("default.png") : image_tag(movie.p_poster)
+              .title= truncate(movie.title, length:20)
+              .score= "#{(movie.a_score + movie.c_score)/2}%"
+              .follow-action
+                -if current_user.movies.include?(movie)
+                  = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true)

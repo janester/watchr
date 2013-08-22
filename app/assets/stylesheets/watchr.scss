@@ -1,4 +1,5 @@
 $red:#b9090b;
+$yellow:#fded00;
 
 body {
   margin-bottom: 50px;
@@ -36,9 +37,13 @@ body {
       list-style: none;
       height: 100%;
       white-space: nowrap;
+      td#empty {
+        font-size: 48px;
+      }
       td.movie_tile {
         vertical-align: top;
         display: inline-block;
+        border: 2px solid black;
         margin:0 9px;
         width: 200px;
         height: 300px;
@@ -50,6 +55,10 @@ body {
         }
         .img {
           height: 179px;
+          margin-bottom: 10px;
+          img {
+            border: 2px solid $yellow;
+          }
         }
         .follow-action {
           margin-top: 15%;
