@@ -1,6 +1,6 @@
 
 .img= movie.p_poster.include?("default.gif") ? image_tag("default.png") : image_tag(movie.p_poster)
-.title= movie.title
+.title= truncate(movie.title, length:20)
 .score= "#{(movie.a_score + movie.c_score)/2}%"
 .follow-action
   -if user_signed_in?

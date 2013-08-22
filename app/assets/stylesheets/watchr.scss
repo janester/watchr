@@ -28,6 +28,7 @@ body {
 .table-holder {
   width: 960px;
   overflow: scroll;
+  overflow-x: hidden;
   margin: auto;
   table {
     border-spacing: 15px;
@@ -51,6 +52,7 @@ body {
           height: 179px;
         }
         .follow-action {
+          margin-top: 15%;
           text-align: center;
         }
       }
