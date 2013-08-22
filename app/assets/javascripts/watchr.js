@@ -1,12 +1,9 @@
 $(function(){
-  set_button_heights();
   $("body").on("mouseenter", ".slide-right", start_timer);
   $("body").on("mouseleave", ".slide-right", stop_timer);
   $("body").on("mouseenter", ".slide-left", start_timer);
   $("body").on("mouseleave", ".slide-left", stop_timer);
-
-
-})
+});
 x = {in_theaters:0, opening:0, upcoming:0, following:0}
 timer = null;
 el = null;
@@ -16,7 +13,7 @@ total = null;
 function start_timer() {
   el = this.parentElement.children[2];
   left = this.classList[0].split("-")[1] == "left"
-  total = $(this).siblings(".table-holder").children().children().children().width();
+  total = $(this).siblings(".table-holder").children().children().children()[0].scrollWidth - $(this).siblings(".table-holder").width();
   timer = setInterval(scrollSideways, 20);
 }
 
@@ -32,12 +29,3 @@ function scrollSideways() {
   }
   $(el).scrollLeft(x[el.id]);
 }
-
-function set_button_heights() {
-  // $.each($(".table-holder"), function(k, v){
-  //   var value = $(v);
-  //   var height = value.height();
-  //   console.log(height);
-  //   value.siblings().css("height", height+"px");
-  // })//end each loop
-}//end set_button_heights function

@@ -1,3 +1,5 @@
+$red:#b9090b;
+
 body {
   margin-bottom: 50px;
 }
@@ -24,23 +26,37 @@ body {
 .table-holder {
   width: 960px;
   overflow: scroll;
-  padding: 20px 0;
   margin: auto;
-  .movie_list {
-    list-style: none;
-    height: 100%;
-    .movie_tile {
-      vertical-align: top;
-      width: 200px;
+  table {
+    border-spacing: 15px;
+    .movie_list {
+      list-style: none;
       height: 100%;
-      padding: 10px;
-      border: 2px solid red;
-      .img, .title, .score {
-        text-align: center;
-        margin: auto;
+      white-space: nowrap;
+      td.movie_tile {
+        vertical-align: top;
+        display: inline-block;
+        margin:0 9px;
+        width: 200px;
+        height: 300px;
+        padding: 10px;
+        background: $red;
+        .img, .title, .score {
+          text-align: center;
+          margin: auto;
+        }
+        .img {
+          height: 179px;
+        }
+        .follow-action {
+          text-align: center;
+        }
       }
-      .img {
-        height: 179px;
+      td.movie_tile:first-child {
+        margin-left: 0;
+      }
+      td.movie_tile:last-child {
+        margin-right: 0;
       }
     }
   }

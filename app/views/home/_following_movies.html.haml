@@ -9,5 +9,6 @@
             .img= movie.p_poster.include?("default.gif") ? image_tag("default.png") : image_tag(movie.p_poster)
             .title= movie.title
             .score= "#{(movie.a_score + movie.c_score)/2}%"
-            -if current_user.movies.include?(movie)
-              = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true)
+            .follow-action
+              -if current_user.movies.include?(movie)
+                = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true)
