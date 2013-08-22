@@ -1,2 +1,6 @@
 %h1 Home#index
 %p Find me in app/views/home/index.html.haml
+
+%ul
+  - @movies.each do |movie|
+    %li= "#{movie.title} | #{movie.kind}"
