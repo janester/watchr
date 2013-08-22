@@ -11,4 +11,6 @@
 
 class Actor < ActiveRecord::Base
   attr_accessible :name, :rt_id
+  has_many :characters
+  has_many :movies, :through => :characters
 end

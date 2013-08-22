@@ -42,4 +42,9 @@ class Movie < ActiveRecord::Base
                   :imdb_id,
                   :theater_release,
                   :dvd_release
+
+  has_many :followings
+  has_many :users, :through => :followings
+  has_many :characters
+  has_many :actors, :through => :characters
 end
