@@ -1,7 +1,10 @@
 %h1 Home#index
 %p Find me in app/views/home/index.html.haml
 
-/["box_office", "in_theaters", "opening", "upcoming"]
+-if user_signed_in?
+  %h3 Following
+  %div{id:"following-movies"}
+    = render :partial => "following_movies"
 
 %h3 In Theaters
 .table-holder

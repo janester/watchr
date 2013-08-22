@@ -1,2 +1,4 @@
 var id = "#movie-"+"<%= @movie.id %>"
 $(id).empty().append("<%= j render :partial => 'home/movie', :locals => {movie:@movie} %>")
+
+$("#following-movies").empty().append("<%= j render :partial => 'home/following_movies' %>")
