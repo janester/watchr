@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'geocoder'
 gem 'stamp'
+gem 'devise'
 
 
 
