@@ -3,6 +3,8 @@ $(function(){
   $("body").on("mouseleave", ".slide-right", stop_timer);
   $("body").on("mouseenter", ".slide-left", start_timer);
   $("body").on("mouseleave", ".slide-left", stop_timer);
+  $("body").on("mouseenter", ".movie_tile", add_follow_btn)
+  $("body").on("mouseleave", ".movie_tile", remove_follow_btn)
 });
 x = {in_theaters:0, opening:0, upcoming:0, following:0}
 timer = null;
@@ -28,4 +30,26 @@ function scrollSideways() {
     x[el.id] += 10;
   }
   $(el).scrollLeft(x[el.id]);
+}
+
+function add_follow_btn() {
+  var div = null;
+  if($(this).children().length > 1) {
+    div = $(this).children(".follow-action");
+  }
+  else {
+    div = $(this).children().children(".follow-action")
+  }
+  div.removeClass("hide");
+}
+
+function remove_follow_btn() {
+  var div = null;
+  if($(this).children().length > 1) {
+    div = $(this).children(".follow-action");
+  }
+  else {
+    div = $(this).children().children(".follow-action")
+  }
+  div.addClass("hide");
 }

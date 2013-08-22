@@ -12,6 +12,6 @@
               .img= movie.p_poster.include?("default.gif") ? image_tag("default.png") : image_tag(movie.p_poster)
               .title= truncate(movie.title, length:20)
               .score= "#{(movie.a_score + movie.c_score)/2}%"
-              .follow-action
+              .follow-action.hide
                 -if current_user.movies.include?(movie)
-                  = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true)
+                  = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true, :class => "unfollow-btn")
