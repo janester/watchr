@@ -12,7 +12,7 @@
       %tr.movie_list
         - @in_theaters.each do |movie|
           %td.movie_tile
-            %div{id:"movie-#{movie.id}"}
+            %div{id:"movie-#{movie.id}", class:"movie-info"}
               = render :partial => "movie", :locals => {movie:movie}
 
 
@@ -25,7 +25,7 @@
       %tr.movie_list
         - @opening.each do |movie|
           %td.movie_tile
-            %div{id:"movie-#{movie.id}"}
+            %div{id:"movie-#{movie.id}", class:"movie-info"}
               = render :partial => "movie", :locals => {movie:movie}
 
 
@@ -38,5 +38,5 @@
       %tr.movie_list
         - @upcoming.each do |movie|
           %td.movie_tile
-            %div{id:"movie-#{movie.id}"}
+            %div{id:"movie-#{movie.id}", class:"movie-info"}
               = render :partial => "movie", :locals => {movie:movie}

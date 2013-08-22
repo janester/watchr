@@ -4,7 +4,7 @@ $yellow:#fded00;
 body {
   margin-bottom: 50px;
   font-family: 'Lato', sans-serif;
-  font-weight: 300;
+  font-weight: 100;
 }
 
 .arrow-holder {
@@ -50,54 +50,65 @@ body {
         height: 300px;
         padding: 10px;
         background: $red;
-        .img, .title, .score {
-          text-align: center;
-          margin: auto;
-        }
-        .img {
-          height: 179px;
-          margin-bottom: 10px;
-          img {
-            border: 4px solid $yellow;
+        .movie-info {
+          white-space: normal;
+          height: 100%;
+          .img, .title, .score, .synopsis {
+            text-align: center;
+            margin: auto;
+          }// img class, title class, score class
+          .img {
+            height: 179px;
+            margin-bottom: 10px;
+            img {
+              border: 4px solid $yellow;
+            }//img tag
+          }//img class
+          .synopsis {
+            height: 60px;
+            text-align: left;
           }
-        }
-        .follow-action {
-          text-align: center;
-          width: 200px;
-          height: 300px;
-          position: relative;
-          top:-237px;
-          left:-10px;
-          padding:10px;
-          background:rgba(0, 0, 0, 0.6);
-          .follow-btn, .unfollow-btn {
-            border: 4px solid $red;
-            background: $yellow;
-            padding: 0 10%;
-            font-size: 30px;
-            margin-top: 60%;
-            display: inline-block;
-            -webkit-box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.75);
-            -moz-box-shadow:    0px 4px 5px rgba(50, 50, 50, 0.75);
-            box-shadow:         0px 4px 5px rgba(50, 50, 50, 0.75);
-            text-decoration: none;
-            color:black;
+          .title, .score {
+            font-weight: 300;
           }
-          .unfollow-btn {
-            background: $red;
-            border: 4px solid $yellow;
-          }
-        }
-      }
+          .follow-action {
+            text-align: center;
+            width: 200px;
+            height: 300px;
+            position: relative;
+            top:-299px;
+            left:-10px;
+            padding:10px;
+            background:rgba(0, 0, 0, 0.6);
+            .follow-btn, .unfollow-btn {
+              border: 4px solid $red;
+              background: $yellow;
+              padding: 0 10%;
+              font-size: 30px;
+              margin-top: 60%;
+              display: inline-block;
+              -webkit-box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.75);
+              -moz-box-shadow:    0px 4px 5px rgba(50, 50, 50, 0.75);
+              box-shadow:         0px 4px 5px rgba(50, 50, 50, 0.75);
+              text-decoration: none;
+              color:black;
+            }// follow btn and unfollow btn
+            .unfollow-btn {
+              background: $red;
+              border: 4px solid $yellow;
+            }//unfollow-btn
+          }// follow-action
+        }//movie-info
+      }// movie-tile (td)
       td.movie_tile:first-child {
         margin-left: 0;
-      }
+      }//first movie-tile
       td.movie_tile:last-child {
         margin-right: 0;
-      }
-    }
-  }
-}
+      }//last movie-tile
+    }//movie-list (aka tr)
+  }//table
+}//table holder
 
 .hide {
   display:none;
