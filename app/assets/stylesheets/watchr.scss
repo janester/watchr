@@ -1,0 +1,25 @@
+.table-holder {
+  width: 960px;
+  overflow: scroll;
+  padding: 20px 0;
+  border: 2px solid black;
+  margin: auto;
+  .movie_list {
+    list-style: none;
+    height: 100%;
+    .movie_tile {
+      vertical-align: top;
+      width: 200px;
+      height: 100%;
+      padding: 10px;
+      border: 2px solid red;
+      .img, .title, .score {
+        text-align: center;
+        margin: auto;
+      }
+      .img {
+        height: 179px;
+      }
+    }
+  }
+}

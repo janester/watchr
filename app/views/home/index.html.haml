@@ -1,6 +1,33 @@
 %h1 Home#index
 %p Find me in app/views/home/index.html.haml
 
-%ul
-  - @movies.each do |movie|
-    %li= "#{movie.title} | #{movie.kind}"
+/["box_office", "in_theaters", "opening", "upcoming"]
+
+%h3 In Theaters
+.table-holder
+  %table
+    %tr.movie_list
+      - @in_theaters.each do |movie|
+        %td.movie_tile
+          %div{id:"movie-#{movie.id}"}
+            = render :partial => "movie", :locals => {movie:movie}
+
+
+%h3 Opening
+.table-holder
+  %table
+    %tr.movie_list
+      - @opening.each do |movie|
+        %td.movie_tile
+          %div{id:"movie-#{movie.id}"}
+            = render :partial => "movie", :locals => {movie:movie}
+
+
+%h3 Upcoming
+.table-holder
+  %table
+    %tr.movie_list
+      - @upcoming.each do |movie|
+        %td.movie_tile
+          %div{id:"movie-#{movie.id}"}
+            = render :partial => "movie", :locals => {movie:movie}

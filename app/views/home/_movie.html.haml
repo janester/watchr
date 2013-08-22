@@ -1,0 +1,11 @@
+
+.img= movie.p_poster.include?("default.gif") ? image_tag("default.png") : image_tag(movie.p_poster)
+.title= movie.title
+.score= "#{(movie.a_score + movie.c_score)/2}%"
+-if user_signed_in?
+  -if current_user.movies.include?(movie)
+    = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true)
+  -else
+    =form_tag followings_path, :remote => true do
+      = hidden_field_tag :movie_id, movie.id
+      = submit_tag "Follow"
