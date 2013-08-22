@@ -1,36 +1,42 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
-
 -if user_signed_in?
   %h3 Following
   %div{id:"following-movies"}
     = render :partial => "following_movies"
 
 %h3 In Theaters
-.table-holder
-  %table
-    %tr.movie_list
-      - @in_theaters.each do |movie|
-        %td.movie_tile
-          %div{id:"movie-#{movie.id}"}
-            = render :partial => "movie", :locals => {movie:movie}
+.arrow-holder
+  .slide-right
+  .slide-left
+  .table-holder#in_theaters
+    %table
+      %tr.movie_list
+        - @in_theaters.each do |movie|
+          %td.movie_tile
+            %div{id:"movie-#{movie.id}"}
+              = render :partial => "movie", :locals => {movie:movie}
 
 
 %h3 Opening
-.table-holder
-  %table
-    %tr.movie_list
-      - @opening.each do |movie|
-        %td.movie_tile
-          %div{id:"movie-#{movie.id}"}
-            = render :partial => "movie", :locals => {movie:movie}
+.arrow-holder
+  .slide-right
+  .slide-left
+  .table-holder#opening
+    %table
+      %tr.movie_list
+        - @opening.each do |movie|
+          %td.movie_tile
+            %div{id:"movie-#{movie.id}"}
+              = render :partial => "movie", :locals => {movie:movie}
 
 
 %h3 Upcoming
-.table-holder
-  %table
-    %tr.movie_list
-      - @upcoming.each do |movie|
-        %td.movie_tile
-          %div{id:"movie-#{movie.id}"}
-            = render :partial => "movie", :locals => {movie:movie}
+.arrow-holder
+  .slide-right
+  .slide-left
+  .table-holder#upcoming
+    %table
+      %tr.movie_list
+        - @upcoming.each do |movie|
+          %td.movie_tile
+            %div{id:"movie-#{movie.id}"}
+              = render :partial => "movie", :locals => {movie:movie}

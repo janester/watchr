@@ -1,8 +1,30 @@
+body {
+  margin-bottom: 50px;
+}
+
+.arrow-holder {
+  width: 90%;
+  height: 350px;
+  margin: auto;
+  .slide-right {
+    background: url("slider-arrow-right.png");
+    float: right;
+  }
+  .slide-left {
+    background: url("slider-arrow-left.png");
+    float: left;
+  }
+  .slide-right, .slide-left {
+    height: 100%;
+    width: 100px;
+    z-index: 2;
+  }
+}
+
 .table-holder {
   width: 960px;
   overflow: scroll;
   padding: 20px 0;
-  border: 2px solid black;
   margin: auto;
   .movie_list {
     list-style: none;
