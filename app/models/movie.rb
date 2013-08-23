@@ -57,23 +57,23 @@ class Movie < ActiveRecord::Base
       puts "I am working on #{movie["title"]}..."
       new_movie = Movie.find_or_initialize_by_rt_id(movie["id"])
       new_movie.update_attributes(:a_score => movie["ratings"]["audience_score"],
-                                                :c_score => movie["ratings"]["critics_score"],
-                                                :runtime => movie["runtime"],
-                                                :synopsis => movie["synopsis"],
-                                                :title => movie["title"],
-                                                :year => movie["year"],
-                                                :o_poster => movie["posters"]["original"],
-                                                :t_poster => movie["posters"]["thumbnail"],
-                                                :d_poster => movie["posters"]["detailed"],
-                                                :p_poster => movie["posters"]["profile"],
-                                                :similar => movie["links"]["similar"],
-                                                :url => movie["links"]["self"],
-                                                :rt_id => movie["id"],
-                                                # :imdb_id => movie["alternate_ids"]["imdb"],
-                                                :theater_release => movie["release_dates"]["theater"],
-                                                :dvd_release => movie["release_dates"]["dvd"],
-                                                :kind => kind
-                                                )
+                                  :c_score => movie["ratings"]["critics_score"],
+                                  :runtime => movie["runtime"],
+                                  :synopsis => movie["synopsis"],
+                                  :title => movie["title"],
+                                  :year => movie["year"],
+                                  :o_poster => movie["posters"]["original"],
+                                  :t_poster => movie["posters"]["thumbnail"],
+                                  :d_poster => movie["posters"]["detailed"],
+                                  :p_poster => movie["posters"]["profile"],
+                                  :similar => movie["links"]["similar"],
+                                  :url => movie["links"]["self"],
+                                  :rt_id => movie["id"],
+                                  # :imdb_id => movie["alternate_ids"]["imdb"],
+                                  :theater_release => movie["release_dates"]["theater"],
+                                  :dvd_release => movie["release_dates"]["dvd"],
+                                  :kind => kind
+                                  )
       movie["abridged_cast"].each do |actor|
         puts "adding #{actor["name"]}..."
         new_actor = Actor.find_or_create_by_rt_id(name:actor["name"], rt_id:actor["id"])
@@ -98,11 +98,8 @@ class Movie < ActiveRecord::Base
           Movie.create_movies(r["movies"], kind)
         end
       else
-        begin
-          puts "I am about to make #{results["movies"].length} movies from page 1 of #{kind}..."
-          Movie.create_movies(result["movies"], kind)
-        rescue
-        end
+        puts "I am about to make #{result["movies"].length} movies from page 1 of #{kind}..."
+        Movie.create_movies(result["movies"], kind)
       end
     end
   end
