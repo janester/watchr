@@ -1,2 +1,20 @@
-%h1 Movies#show
-%p Find me in app/views/movies/show.html.haml
+.movie-show-info-container
+  %h2= "#{@movie.title} (#{@movie.year})"
+  = "#{(@movie.a_score+@movie.c_score)/2}%"
+  = "#{@movie.a_score}%"
+  = "#{@movie.c_score}%"
+  = image_tag(@movie.d_poster)
+  %iframe{src:"http://www.youtube.com/embed/#{@movie.trailer}?iv_load_policy=3", width:"640", height:"390", frameborder:0}
+
+-if @similar.length > 4
+  %h3 Similar Movies
+  .arrow-holder
+    .slide-right
+    .slide-left
+    .table-holder#opening
+      %table
+        %tr.movie_list
+          - @similar.each do |movie|
+            %td.movie_tile
+              %div{id:"movie-#{movie.id}", class:"movie-info"}
+                = render :partial => "home/movie", :locals => {movie:movie}

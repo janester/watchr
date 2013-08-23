@@ -4,7 +4,7 @@
 .score= "#{(movie.a_score + movie.c_score)/2}%"
 .synopsis= truncate(movie.synopsis, length:70)
 .follow-action.hide
-  = link_to("View Trailer", trailer_movie_path(movie.id))
+  = link_to("View Trailer", trailer_movie_path(movie.id), :class => "trailer-btn")
   -if user_signed_in?
     -if current_user.movies.include?(movie)
       = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true, :class=>"unfollow-btn")
@@ -12,3 +12,4 @@
       %a{href:"/followings?movie_id=#{movie.id}", data:{remote:true, method:"post"}, class:"follow-btn"}
         %i.icon-play-cirlce
         Follow
+  = link_to("More Info", movie_path(movie.id), :class => "info-btn")

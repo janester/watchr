@@ -53,6 +53,7 @@ class Movie < ActiveRecord::Base
   has_many :actors, :through => :characters
 
   def Movie.create_movies(movies, kind)
+    new_movies = []
     movies.each do |movie|
       puts "I am working on #{movie["title"]}..."
       new_movie = Movie.find_or_initialize_by_rt_id(movie["id"])
@@ -74,6 +75,7 @@ class Movie < ActiveRecord::Base
                                   :dvd_release => movie["release_dates"]["dvd"],
                                   :kind => kind
                                   )
+      new_movies << new_movie
       movie["abridged_cast"].each do |actor|
         puts "adding #{actor["name"]}..."
         new_actor = Actor.find_or_create_by_rt_id(name:actor["name"], rt_id:actor["id"])
@@ -86,6 +88,7 @@ class Movie < ActiveRecord::Base
         end
       end
     end
+    return new_movies
   end
 
   def Movie.get_movies
@@ -110,6 +113,15 @@ class Movie < ActiveRecord::Base
       result = client.videos_by(:query => "#{self.title} trailer")
       self.trailer = result.videos.first.video_id.split(":")[-1]
       self.save
+    end
+  end
+
+  def get_similar
+    results = HTTParty.get("#{self.similar}?apikey=#{ENV['WATCHR_RT_KEY']}")
+    if results["movies"].length > 0
+      return Movie.create_movies(results["movies"], "similar")
+    else
+      return []
     end
   end
 end

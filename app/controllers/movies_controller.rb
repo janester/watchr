@@ -1,5 +1,8 @@
 class MoviesController < ApplicationController
   def show
+    @movie = Movie.find(params[:id])
+    @movie.get_trailer
+    @similar = @movie.get_similar
   end
 
   def trailer
