@@ -1,14 +1,20 @@
-.movie-show-info-container
+.movie-cover-photo{style:"background:url('#{@movie.cover}'); background-size:cover; width:100%; height:300px;"}
   %h2= "#{@movie.title} (#{@movie.year})"
-  = "#{(@movie.a_score+@movie.c_score)/2}%"
-  = "#{@movie.a_score}%"
-  = "#{@movie.c_score}%"
-  = image_tag(@movie.d_poster)
-  = image_tag(@movie.cover)
-  = @movie.likes
-  = @movie.talking_about
-  = @movie.website
-  %iframe{src:"http://www.youtube.com/embed/#{@movie.trailer}?iv_load_policy=3", width:"640", height:"390", frameborder:0}
+.movie-show-info-container
+  .movie-profile-pic.col-2
+    = image_tag(@movie.d_poster)
+  .movie-trailer.col-8
+    %iframe{src:"http://www.youtube.com/embed/#{@movie.trailer}?iv_load_policy=3", width:"640", height:"390", frameborder:0}
+  .movie-stats-container.col-2
+    .movie-stats
+      #avg= "#{(@movie.a_score+@movie.c_score)/2}%"
+      #audience= "#{@movie.a_score}%"
+      #critics= "#{@movie.c_score}%"
+
+      #likes= @movie.likes
+      #talking= @movie.talking_about
+      #web= @movie.website
+
 
 -if @similar.length > 4
   %h3 Similar Movies

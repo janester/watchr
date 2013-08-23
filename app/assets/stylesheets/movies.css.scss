@@ -1,2 +1,42 @@
+$red:#b9090b;
+$yellow:#fded00;
 //SHOW PAGE
+.movie-show-info-container {
+  z-index: 2;
+  position: relative;
+  vertical-align: top;
+  top: -130px;
+  overflow: hidden;
+  // text-align: center;
+  div {
+    display: inline-block;
+  }// div inside movie-show-info-container
+  .movie-stats {
+    width: 180px;
+    height: 250px;
+    vertical-align: top;
+    background: $red;
+    div {
+      display: block;
+    }//div inside movie-stats
+  }//movie-stats
+  .movie-profile-pic {
+    height:100%;
+    vertical-align: top;
+  }//movie-profile-pic
+}// movie-show-info-container
 
+.col-2 {
+  width: 20%;
+  margin:auto;
+  float: left;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.col-8 {
+  width: 60%;
+  margin:auto;
+  float: left;
+  text-align: center;
+}
