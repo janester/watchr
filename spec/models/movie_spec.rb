@@ -23,6 +23,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  kind            :string(255)
+#  trailer         :text
 #
 
 require 'spec_helper'

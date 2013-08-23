@@ -23,6 +23,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  kind            :string(255)
+#  trailer         :text
 #
 
 class Movie < ActiveRecord::Base
@@ -43,15 +44,17 @@ class Movie < ActiveRecord::Base
     :imdb_id,
     :theater_release,
     :dvd_release,
-    :kind
+    :kind,
+    :trailer
 
   has_many :followings
   has_many :users, :through => :followings
-  has_many :characters
+  has_many :characters, :dependent => :destroy
   has_many :actors, :through => :characters
 
   def Movie.create_movies(movies, kind)
     movies.each do |movie|
+      puts "I am working on #{movie["title"]}..."
       new_movie = Movie.find_or_initialize_by_rt_id(movie["id"])
       new_movie.update_attributes(:a_score => movie["ratings"]["audience_score"],
                                                 :c_score => movie["ratings"]["critics_score"],
@@ -66,16 +69,18 @@ class Movie < ActiveRecord::Base
                                                 :similar => movie["links"]["similar"],
                                                 :url => movie["links"]["self"],
                                                 :rt_id => movie["id"],
-                                                :imdb_id => movie["alternate_ids"]["imdb"],
+                                                # :imdb_id => movie["alternate_ids"]["imdb"],
                                                 :theater_release => movie["release_dates"]["theater"],
                                                 :dvd_release => movie["release_dates"]["dvd"],
                                                 :kind => kind
                                                 )
       movie["abridged_cast"].each do |actor|
+        puts "adding #{actor["name"]}..."
         new_actor = Actor.find_or_create_by_rt_id(name:actor["name"], rt_id:actor["id"])
         actor["characters"].nil? ? characters = [nil] : characters = actor["characters"]
         characters.each do |character|
           if Character.where(movie_id:new_movie.id, actor_id:new_actor.id, name:character).empty?
+            puts "adding character #{character}..."
             Character.create(movie_id:new_movie.id, actor_id:new_actor.id, name:character)
           end
         end
@@ -84,22 +89,30 @@ class Movie < ActiveRecord::Base
   end
 
   def Movie.get_movies
-    ["box_office", "in_theaters", "opening", "upcoming"].each do |kind|
+    ["box_office", "in_theaters", "upcoming", "opening"].each do |kind|
       result = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/#{kind}.json?apikey=#{ENV['WATCHR_RT_KEY']}")
       if kind == "in_theaters" || kind == "upcoming"
         ((result["total"].to_f/50.00).ceil.to_i).times do |page|
           r = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/#{kind}.json?page_limit=50&page=#{page+1}&country=us&apikey=#{ENV['WATCHR_RT_KEY']}")
-          begin
-            Movie.create_movies(r["movies"], kind)
-          rescue
-          end
+          puts "I am about to make #{r["movies"].length} movies from page #{page} of #{kind}..."
+          Movie.create_movies(r["movies"], kind)
         end
       else
         begin
+          puts "I am about to make #{results["movies"].length} movies from page 1 of #{kind}..."
           Movie.create_movies(result["movies"], kind)
         rescue
         end
       end
+    end
+  end
+
+  def get_trailer
+    if self.trailer.nil?
+      client = YouTubeIt::Client.new(:dev_key => ENV['WATCHR_YOUTUBE_KEY'])
+      result = client.videos_by(:query => "#{self.title} trailer")
+      self.trailer = result.videos.first.video_id.split(":")[-1]
+      self.save
     end
   end
 end
