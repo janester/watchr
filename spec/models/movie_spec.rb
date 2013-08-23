@@ -24,6 +24,11 @@
 #  updated_at      :datetime         not null
 #  kind            :string(255)
 #  trailer         :text
+#  fb_id           :integer
+#  cover           :text
+#  likes           :integer
+#  website         :text
+#  talking_about   :integer
 #
 
 require 'spec_helper'

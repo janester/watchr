@@ -24,6 +24,11 @@
 #  updated_at      :datetime         not null
 #  kind            :string(255)
 #  trailer         :text
+#  fb_id           :integer
+#  cover           :text
+#  likes           :integer
+#  website         :text
+#  talking_about   :integer
 #
 
 class Movie < ActiveRecord::Base
@@ -45,7 +50,13 @@ class Movie < ActiveRecord::Base
     :theater_release,
     :dvd_release,
     :kind,
-    :trailer
+    :trailer,
+    :fb_id,
+    :cover,
+    :likes,
+    :website,
+    :talking_about
+
 
   has_many :followings
   has_many :users, :through => :followings
@@ -122,6 +133,21 @@ class Movie < ActiveRecord::Base
       return Movie.create_movies(results["movies"], "similar")
     else
       return []
+    end
+  end
+
+  def get_facebook_info
+    if self.fb_id.nil?
+      page = HTTParty.get("https://graph.facebook.com/search?q=#{self.title.split(" ").join("+")}&type=page&access_token=#{ENV['WATCHR_FB_ACCESS']}")
+      #add better check later to make sure it's the movie I was looking for
+      fb_id = page["data"][0]["id"]
+      results = HTTParty.get("https://graph.facebook.com/#{fb_id}?access_token=#{ENV['WATCHR_FB_ACCESS']}")
+      self.update_attributes(fb_id:fb_id,
+                             website:results["website"],
+                             likes:results["likes"],
+                             cover:results["cover"]["source"],
+                             talking_about:results["talking_about_count"]
+                             )
     end
   end
 end

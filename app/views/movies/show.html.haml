@@ -4,6 +4,10 @@
   = "#{@movie.a_score}%"
   = "#{@movie.c_score}%"
   = image_tag(@movie.d_poster)
+  = image_tag(@movie.cover)
+  = @movie.likes
+  = @movie.talking_about
+  = @movie.website
   %iframe{src:"http://www.youtube.com/embed/#{@movie.trailer}?iv_load_policy=3", width:"640", height:"390", frameborder:0}
 
 -if @similar.length > 4
@@ -18,3 +22,5 @@
             %td.movie_tile
               %div{id:"movie-#{movie.id}", class:"movie-info"}
                 = render :partial => "home/movie", :locals => {movie:movie}
+-else
+  = @similar.length
