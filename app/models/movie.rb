@@ -138,10 +138,13 @@ class Movie < ActiveRecord::Base
 
   def get_facebook_info
     if self.fb_id.nil?
-      page = HTTParty.get("https://graph.facebook.com/search?q=#{self.title.split(" ").join("+")}&type=page&access_token=#{ENV['WATCHR_FB_ACCESS']}")
+      gen_key = HTTParty.get("https://graph.facebook.com/oauth/access_token?client_id=#{ENV['WATCHR_ID']}&client_secret=#{ENV['WATCHR_SECRET']}&grant_type=client_credentials")
+      title = self.title.split(" ").join("+")+"+movie"
+      encoded_url = URI.encode("https://graph.facebook.com/search?q=#{title}&type=page&#{gen_key}")
+      page = HTTParty.get(encoded_url)
       #add better check later to make sure it's the movie I was looking for
       fb_id = page["data"][0]["id"]
-      results = HTTParty.get("https://graph.facebook.com/#{fb_id}?access_token=#{ENV['WATCHR_FB_ACCESS']}")
+      results = HTTParty.get("https://graph.facebook.com/#{fb_id}")
       self.update_attributes(fb_id:fb_id,
                              website:results["website"],
                              likes:results["likes"],
