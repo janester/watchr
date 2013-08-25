@@ -62,6 +62,7 @@ class Movie < ActiveRecord::Base
   has_many :users, :through => :followings
   has_many :characters, :dependent => :destroy
   has_many :actors, :through => :characters
+  has_many :posts
 
   def Movie.create_movies(movies, kind)
     new_movies = []

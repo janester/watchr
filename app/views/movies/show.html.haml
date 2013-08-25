@@ -15,6 +15,9 @@
       #talking= @movie.talking_about
       #web= @movie.website
 
+- @movie.characters.each do |character|
+  %p= "#{character.actor.name} - #{character.name}"
+
 
 -if @similar.length > 4
   %h3 Similar Movies
