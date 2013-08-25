@@ -67,11 +67,12 @@ ActiveRecord::Schema.define(:version => 20130825003001) do
 
   create_table "posts", :force => true do |t|
     t.text     "content"
-    t.integer  "votes"
+    t.integer  "votes",      :default => 0
     t.string   "kind"
     t.string   "party_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "movie_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|
