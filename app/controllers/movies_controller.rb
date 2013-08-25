@@ -3,7 +3,8 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @movie.get_trailer
     @movie.get_facebook_info
-    Post.create_facebook_posts(@movie)
+    Post.get_facebook_posts(@movie)
+    @facebook_posts = @movie.posts.select{|x| x.kind == "facebook"}
     @similar = @movie.get_similar
   end
 

@@ -15,6 +15,10 @@
       #talking= @movie.talking_about
       #web= @movie.website
 
+-@facebook_posts.each do |post|
+  %p= raw post.content
+
+
 - @movie.characters.each do |character|
   %p= "#{character.actor.name} - #{character.name}"
 

@@ -3,12 +3,15 @@ class Post < ActiveRecord::Base
   belongs_to :movie
 
   def Post.create_facebook_posts(posts, movie)
+    #do more to figure out what kind of post it is, and save pictures?
     posts.each do |post|
       from = post["from"]
       if from["category"] == "Movie" || from["category"] == "Studio"
-        new_post = Post.find_or_initialize_by_party_id(post["id"])
-        new_post.update_attributes(content:post["message"], kind:"facebook")
-        movie.posts << new_post
+        if !post["message"].nil? && post["message"].include?("http://")
+          message = post["message"].gsub(/http:\/\/\S+/, '<a href="\0">\0</a>')
+          new_post = Post.find_or_create_by_party_id(party_id:post["id"], content:message, kind:"facebook")
+          movie.posts << new_post unless movie.posts.include?(new_post)
+        end
       end
     end
   end #create_facebook_posts end

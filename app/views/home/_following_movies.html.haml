@@ -17,3 +17,5 @@
                 .follow-action.hide
                   -if current_user.movies.include?(movie)
                     = link_to("Unfollow",following_path(movie.id), :method => :delete, :remote => true, :class => "unfollow-btn")
+                    = link_to("More Info", movie_path(movie.id), :class => "info-btn")
+
