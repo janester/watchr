@@ -40,3 +40,34 @@ $yellow:#fded00;
   float: left;
   text-align: center;
 }
+// {style:"background-image:url('#{@movie.cover}'); background-size:cover; width:70%; height:300px; margin:auto"}
+.movie-cover-photo {
+  width:1166px;
+  height: 300px;
+  margin:auto;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.fade {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0px;
+  background:
+    -webkit-linear-gradient(left,
+      rgba(158, 27, 224,1) 0%,
+      rgba(158, 27, 224,0) 20%,
+      rgba(158, 27, 224,0) 80%,
+      rgba(158, 27, 224,1) 100%
+    ), -webkit-linear-gradient(bottom,
+      rgba(158, 27, 224,1) 0%,
+      rgba(158, 27, 224,0) 20%
+    );
+}
+
+body {
+  background: rgb(158, 27, 224);
+}

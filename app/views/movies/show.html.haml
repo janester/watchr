@@ -1,5 +1,7 @@
-.movie-cover-photo{style:"background:url('#{@movie.cover}'); background-size:cover; width:100%; height:300px;"}
-  %h2= "#{@movie.title} (#{@movie.year})"
+/ %h2= "#{@movie.title} (#{@movie.year})"
+.movie-cover-photo
+  = image_tag(@movie.cover)
+  .fade
 .movie-show-info-container
   .movie-profile-pic.col-2
     = image_tag(@movie.d_poster)
@@ -16,7 +18,7 @@
       #web= @movie.website
 
 -@facebook_posts.each do |post|
-  %p= raw post.content
+  %p= raw "#{post.content} | popularity: #{post.popularity}"
 
 
 - @movie.characters.each do |character|

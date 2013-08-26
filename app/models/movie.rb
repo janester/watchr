@@ -24,11 +24,11 @@
 #  updated_at      :datetime         not null
 #  kind            :string(255)
 #  trailer         :text
-#  fb_id           :integer
+#  fb_id           :string(255)
 #  cover           :text
-#  likes           :integer
+#  likes           :string(255)
 #  website         :text
-#  talking_about   :integer
+#  talking_about   :string(255)
 #
 
 class Movie < ActiveRecord::Base
@@ -145,7 +145,8 @@ class Movie < ActiveRecord::Base
       page = HTTParty.get(encoded_url)
       #add better check later to make sure it's the movie I was looking for
       fb_id = page["data"][0]["id"]
-      results = HTTParty.get("https://graph.facebook.com/#{fb_id}")
+      encoded_url = URI.encode("https://graph.facebook.com/#{fb_id}?#{gen_key}")
+      results = HTTParty.get(encoded_url)
       self.update_attributes(fb_id:fb_id,
                              website:results["website"],
                              likes:results["likes"],
